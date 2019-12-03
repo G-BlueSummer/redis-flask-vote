@@ -1,2 +1,2 @@
 # redis-flask-vote
-使用redis和flsak构造的投票系统
+使用redis和flask构造的投票系统
