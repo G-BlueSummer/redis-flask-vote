@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt && pip install gunicorn
 
 COPY . .
 
-CMD ["gunicorn", "-b", "0.0.0.0:4000", "vote:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "vote:app"]
