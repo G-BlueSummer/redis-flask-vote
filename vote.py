@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash
 from hashlib import sha1
-from time import time, strftime, localtime
+from time import time, ctime
 import redis
 
 r = redis.Redis(decode_responses=True)
@@ -23,7 +23,7 @@ def index():
         articles_title.append(r.hget('article:'+article_id, 'title'))
         articles_votes.append(r.hget('article:'+article_id, 'votes'))
         created = r.hget('article:'+article_id, 'created')
-        articles_created.append(strftime("%a, %d %b %Y %H:%M:%S", localtime(int(created))))
+        articles_created.append(ctime(int(created)))
 
     return render_template('index.html', ids=articles_id, titles=articles_title, votes=articles_votes, createds=articles_created, sort_by_time=sort_by_time)
 
@@ -44,7 +44,7 @@ def article(article_id):
     title = r.hget('article:'+article_id, 'title')
     content = r.hget('article:'+article_id, 'content')
     created = r.hget('article:'+article_id, 'created')
-    created = strftime("%a, %d %b %Y %H:%M:%S", localtime(int(created)))
+    created = ctime(int(created))
     poster = r.hget('article:'+article_id, 'poster')
     votes = r.hget('article:'+article_id, 'votes')
     return render_template('article.html', title=title, content=content, created=created, poster=poster, votes=votes, msg=msg)
