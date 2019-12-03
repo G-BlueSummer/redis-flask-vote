@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <a href="/">返回首页</a>
-    {% if msg %}
-    <p><b>{{ msg }}</b></p>
-    {% endif %}
-    <h1>{{ title }}</h1>
-    <span>作者: {{ user }}</span>
-    <span>发布时间: {{ created }}</span>
-    <p>{{ content }}</p>
-    <h5>投票</h5>
-    <p>当前票数:{{ votes }}</p>
-    <form action="#" method="post">
-        <label for="poster">用户名:</label>
-        <input type="text" name="poster" id="poster" required>
-        <input type="submit" value="投票">
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<a href="/">返回首页</a>
+{% if msg %}
+<p><b>{{ msg }}</b></p>
+{% endif %}
+<h1>{{ title }}</h1>
+<span>作者: {{ user }}</span>
+<span>发布时间: {{ created }}</span>
+<p>{{ content }}</p>
+<h5>投票</h5>
+<p>当前票数:{{ votes }}</p>
+<form action="#" method="post">
+    <label for="poster">用户名:</label>
+    <input type="text" name="poster" id="poster" required>
+    <input type="submit" value="投票">
+</form>
+{% endblock %}

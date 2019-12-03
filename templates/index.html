@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>文章</title>
-</head>
-<body>
-    <a href="/new">新建文章</a>
-    <h1>文章</h1>
-    {% if sort_by_time %}
-    <a href="/?sort=votes">按投票排序</a>
-    {% else %}
-    <a href="/?sort=time">按时间排序</a>
-    {% endif %}
-    <ul>
-        {% for id in ids %}
-        <li><a href="/{{ id }}">{{ titles[loop.index0] }}</a>--{{ votes[loop.index0] }}票--{{ createds[loop.index0] }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block body %}
+
+<a href="/new">新建文章</a>
+<h1>文章</h1>
+{% if sort_by_time %}
+按时间排序/<a href="/?sort=votes">按投票排序</a>
+{% else %}
+<a href="/?sort=time">按时间排序</a>/按投票排序
+{% endif %}
+<ul>
+    {% for id in ids %}
+    <li><a href="/{{ id }}">{{ titles[loop.index0] }}</a>--{{ votes[loop.index0] }}票--{{ createds[loop.index0] }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
