@@ -3,7 +3,7 @@ from hashlib import sha1
 from time import time, ctime
 import redis
 
-r = redis.Redis(decode_responses=True)
+r = redis.Redis(host='redis', decode_responses=True)
 
 app = Flask(__name__)
 
