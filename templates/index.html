@@ -27,7 +27,7 @@
         <tbody>
             {% for id in ids %}
             <tr>
-                <td><a href="/{{ id }}">{{ titles[loop.index0] }}</a></td>
+                <td><a href="/article/{{ id }}">{{ titles[loop.index0] }}</a></td>
                 <td>{{ votes[loop.index0] }}</td>
                 <td>{{ createds[loop.index0] }}</td>
             </tr>

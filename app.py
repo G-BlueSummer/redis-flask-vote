@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, abort
 from hashlib import sha1
 from time import time, ctime
 import redis
@@ -27,8 +27,12 @@ def index():
 
     return render_template('index.html', ids=articles_id, titles=articles_title, votes=articles_votes, createds=articles_created, sort_by_time=sort_by_time)
 
-@app.route('/<string:article_id>', methods=['GET', 'POST'])
+@app.route('/article/<string:article_id>', methods=['GET', 'POST'])
 def article(article_id):
+
+    if not r.exists('article:'+article_id):
+        abort(404)
+
     msg = None
     if request.method == 'POST':
         # 判断是否投过票
