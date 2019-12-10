@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, abort
-from hashlib import sha1
+from uuid import uuid1 as uuid
 from time import time, ctime
 import redis
 
@@ -58,13 +58,11 @@ def article(article_id):
 def new_article():
     # 新建文章
     if request.method == 'POST':
-        article_id = sha1(request.form['title'].encode()).hexdigest()
+        article_id = uuid().hex
         article_title = request.form['title']
         article_content = request.form['content']
         article_poster = request.form['poster']
         article_created = int(time())
-
-        print(article_title, article_content, article_poster, article_created)
 
         r.zadd('time', {article_id: article_created})
         r.zadd('votes', {article_id: 0})
