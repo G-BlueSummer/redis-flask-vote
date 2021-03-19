@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, abort
 from uuid import uuid1 as uuid
 from time import time, ctime
+import os
 import redis
 
-r = redis.Redis(host='redis', decode_responses=True)
+# 从环境变量读取数据库host
+redis_host = os.getenv('REDIS_HOST')
+redis_host = redis_host if redis_host else '127.0.0.1'
+r = redis.Redis(host=redis_host, decode_responses=True)
 
 app = Flask(__name__)
 
